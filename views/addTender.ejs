@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dodaj przetarg</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav>
+    <a href="/">Strona główna</a>
+    <a href="/tenders">Lista przetargów</a>
+    <a href="/tenders/closed">Lista zakończonych przetargów</a>
+    <a href="/tenders/add">Dodaj przetarg</a>
+</nav>
+<h1>Dodaj przetarg</h1>
+<form action="/tenders" method="POST">
+    <label for="title">Nazwa przetargu</label>
+    <input type="text" id="title" name="title" placeholder="Nazwa przetargu" required>
+
+    <label for="institution">Instytucja zamawiająca</label>
+    <input type="text" id="institution" name="institution" placeholder="Instytucja zamawiająca" required>
+
+    <label for="description">Opis przetargu</label>
+    <textarea id="description" name="description" placeholder="Opis przetargu" required></textarea>
+
+    <label for="startDate">Data i godzina rozpoczęcia</label>
+    <input type="datetime-local" id="startDate" name="startDate" required>
+
+    <label for="endDate">Data i godzina zakończenia</label>
+    <input type="datetime-local" id="endDate" name="endDate" required>
+
+    <label for="maxBudget">Maksymalna wartość budżetu</label>
+    <input type="number" id="maxBudget" name="maxBudget" placeholder="Maksymalna wartość budżetu" required>
+
+    <button type="submit">Dodaj przetarg</button>
+</form>
+</body>
+</html>

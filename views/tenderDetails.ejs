@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= tender.title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav>
+    <a href="/">Strona główna</a>
+    <a href="/tenders">Lista przetargów</a>
+    <a href="/tenders/closed">Lista zakończonych przetargów</a>
+    <a href="/tenders/add">Dodaj przetarg</a>
+</nav>
+<div class="tender-details">
+    <h1><%= tender.title %></h1>
+    <label>Opis przetargu:</label>
+    <p><%= tender.description %></p>
+    <label>Instytucja zamawiająca:</label>
+    <p><%= tender.institution %></p>
+    <label>Data rozpoczęcia:</label>
+    <p><%= new Date(tender.startDate).toLocaleString() %></p>
+    <label>Data zakończenia:</label>
+    <p><%= new Date(tender.endDate).toLocaleString() %></p>
+    <% if (new Date() < tender.endDate) { %>
+        <form action="/offers/tender/<%= tender.id %>" method="POST">
+            <h2>Złóż ofertę</h2>
+            <label for="bidderName">Nazwa składającego ofertę:</label>
+            <input type="text" name="bidderName" id="bidderName" placeholder="Nazwa składającego ofertę" required>
+            <label for="bidValue">Wartość oferty:</label>
+            <input type="number" name="bidValue" id="bidValue" placeholder="Wartość oferty" required>
+            <button type="submit">Złóż ofertę</button>
+        </form>
+    <% } else { %>
+        <p>Przetarg zakończony.</p>
+        <% if (allOffersExceedBudget) { %>
+            <p>Przetarg zakończony bez rozstrzygnięcia, wszystkie oferty przekroczyły budżet.</p>
+        <% } else { %>
+            <h2>Złożone oferty:</h2>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Nazwa składającego ofertę</th>
+                    <th>Wartość oferty</th>
+                    <th>Data złożenia</th>
+                </tr>
+                <% sortedOffers.forEach((offer, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= offer.bidderName %></td>
+                        <td><%= offer.bidValue %> PLN</td>
+                        <td><%= new Date(offer.bidDate).toLocaleString() %></td>
+                    </tr>
+                <% }) %>
+            </table>
+        <% } %>
+    <% } %>
+</div>
+</body>
+</html>

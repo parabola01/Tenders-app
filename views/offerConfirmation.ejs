@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Potwierdzenie złożenia oferty</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav>
+    <a href="/">Strona główna</a>
+    <a href="/tenders">Lista przetargów</a>
+    <a href="/tenders/closed">Lista zakończonych przetargów</a>
+    <a href="/tenders/add">Dodaj przetarg</a>
+</nav>
+<div class="confirmation-details">
+    <h1>Potwierdzenie złożenia oferty</h1>
+    <label>Przetarg:</label>
+    <p><%= tender.title %></p>
+    <label>Nazwa składającego ofertę:</label>
+    <p><%= offer.bidderName %></p>
+    <label>Wartość oferty:</label>
+    <p><%= offer.bidValue %> PLN</p>
+    <label>Data złożenia oferty:</label>
+    <p><%= new Date(offer.bidDate).toLocaleString() %></p>
+    <a href="/tenders/<%= tender.id %>">Powrót do przetargu</a>
+</div>
+</body>
+</html>
