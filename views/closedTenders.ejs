@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista zakończonych przetargów</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav>
+    <a href="/">Strona główna</a>
+    <a href="/tenders">Lista przetargów</a>
+    <a href="/tenders/closed">Lista zakończonych przetargów</a>
+    <a href="/tenders/add">Dodaj przetarg</a>
+</nav>
+<h1>Lista zakończonych przetargów</h1>
+<table>
+    <tr>
+        <th>#</th>
+        <th>Tytuł</th>
+        <th>Instytucja zamawiająca</th>
+        <th>Data rozpoczęcia</th>
+        <th>Data zakończenia</th>
+        <th>Stan</th>
+    </tr>
+    <% tenders.forEach((tender, index) => { %>
+        <tr>
+            <td><%= index + 1 %></td>
+            <td><a href="/tenders/<%= tender.id %>"><%= tender.title %></a></td>
+            <td><%= tender.institution %></td>
+            <td><%= new Date(tender.startDate).toLocaleString() %></td>
+            <td><%= new Date(tender.endDate).toLocaleString() %></td>
+            <td>Zakończono</td>
+        </tr>
+    <% }) %>
+</table>
+</body>
+</html>
